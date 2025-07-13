@@ -1,0 +1,74 @@
+.container {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.header-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+}
+
+.header-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1b5299;
+}
+
+.status-display {
+    margin-bottom: 1.2rem;
+}
+
+.status-상담가능 {
+    background-color: #d4f4dd;
+    color: #007a3d;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.status-상담불가 {
+    background-color: #fde2e1;
+    color: #c23934;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.status-자리비움 {
+    background-color: #fff3cd;
+    color: #946200;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.status-오프라인 {
+    background-color: #e3e3e3;
+    color: #636363;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.form-section {
+    margin-top: 1rem;
+}
+
+.action-button {
+    margin-top: 1rem;
+}

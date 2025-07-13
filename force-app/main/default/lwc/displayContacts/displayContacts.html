@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="연결된 Contact 목록" icon-name="standard:contact">
+        <template if:true={contacts}>
+            <lightning-datatable
+                key-field="Id"
+                data={contacts}
+                columns={columns}
+                hide-checkbox-column
+                onrowaction={handleRowAction}>
+            </lightning-datatable>
+
+            <lightning-button
+                class="slds-m-top_medium"
+                variant="brand"
+                label="Case에 적용"
+                onclick={applySelectedContact}
+                disabled={hasNoContactSelected}>
+            </lightning-button>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error">에러 발생: {error}</div>
+        </template>
+    </lightning-card>
+</template>

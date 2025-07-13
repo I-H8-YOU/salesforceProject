@@ -1,0 +1,28 @@
+<template>
+    <div class="container">
+        <div class="header-row">
+            <span class="status-indicator" style={indicatorStyle}></span>
+            <h2 class="header-text">상담사 상태 설정</h2>
+        </div>
+
+        <div class="status-display">
+            <span class={statusClass}>{currentAgentStatus}</span>
+        </div>
+
+        <div class="form-section">
+            <lightning-combobox
+                name="status"
+                label="상태 선택"
+                value={selectedStatus}
+                options={statusOptions}
+                onchange={handleStatusChange}>
+            </lightning-combobox>
+<br>
+            <lightning-button
+                class="slds-m-top_medium action-button"
+                label="상태 저장"
+                onclick={saveStatus}>
+            </lightning-button>
+        </div>
+    </div>
+</template>

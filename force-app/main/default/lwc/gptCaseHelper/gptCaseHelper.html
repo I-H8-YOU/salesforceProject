@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="OlymBot 고객지원 도우미">
+        <div class="chat-container">
+            <template for:each={messages} for:item="msg">
+                <div key={msg.id} class={msg.cssClass}>
+                    <lightning-formatted-rich-text value={msg.text}></lightning-formatted-rich-text>
+                </div>
+            </template>
+            <template if:true={isLoading}>
+                <div class="chat-bubble bot">⌛ 응답을 준비 중입니다...</div>
+            </template>
+        </div>
+
+        <div class="input-area">
+            <lightning-textarea
+                class="msg-input"
+                value={userInput}
+                placeholder="메시지를 입력하세요"
+                onchange={handleInputChange}
+                onkeypress={handleKeyPress}>
+            </lightning-textarea>
+            <lightning-button
+                class="send-btn"
+                label="전송"
+                onclick={sendMessage}
+                variant="brand"
+                disabled={isLoading}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
