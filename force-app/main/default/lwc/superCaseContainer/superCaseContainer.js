@@ -13,7 +13,6 @@ export default class SuperCaseContainer extends LightningElement {
         if (this.isCompleteHangulName(fullName)) {
             const formattedName = this.reformatName(fullName);
 
-            // 요약 새로고침 유도
             this.customerName = '';
             this.showC360 = false;
             this.selectedCaseId = null;
@@ -33,12 +32,10 @@ export default class SuperCaseContainer extends LightningElement {
 
     handleCaseClick(event) {
         this.selectedCaseId = event.detail;
-        // this.selectedAssetId = null;
     }
 
     handleAssetClick(event) {
         this.selectedAssetId = event.detail;
-        // this.selectedCaseId = null;
     }
 
     reformatName(name) {

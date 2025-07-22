@@ -1,0 +1,15 @@
+<template>
+    <template if:true={product}>
+        <div class="product-card">
+            <template if:true={product.imageUrl}>
+                <div class="product-image">
+                    <img src={product.imageUrl} alt="제품 이미지" onerror={handleImageError} />
+                </div>
+            </template>
+            <div class="product-details">
+                <h2>{product.name}</h2>
+                <p>{product.description}</p>
+            </div>
+        </div>
+    </template>
+</template>
