@@ -1,0 +1,18 @@
+<template>
+    <template if:true={record}>
+        <lightning-card title="📄 전체 케이스 상세 정보">
+            <div class="slds-p-around_medium">
+                <p><strong>제목:</strong> {record.Subject}</p>
+                <p><strong>설명:</strong> {record.Description}</p>
+                <p><strong>상태:</strong> {record.Status}</p>
+                <p><strong>우선순위:</strong> {record.Priority}</p>
+                <p><strong>유형:</strong> {record.Type}</p>
+                <p><strong>생성일:</strong> {record.CreatedDate}</p>
+            </div>
+        </lightning-card>
+    </template>
+
+    <template if:true={error}>
+        <p class="slds-text-color_error">오류: {error}</p>
+    </template>
+</template>

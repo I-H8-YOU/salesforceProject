@@ -1,37 +1,48 @@
 <template>
-    <div class="layout">
-        <!-- 왼쪽: AI 도우미 + 상세 정보 -->
-        <div class="left-pane slds-m-bottom_medium">
-            <c-ai-case-helper onnameentered={handleCustomerNameInput}></c-ai-case-helper>
+    <template if:false={isCaseCreated}>
+        <div class="layout">
+            <div class="left-pane slds-m-bottom_medium">
+                <c-ai-case-helper
+                    onnameentered={handleCustomerNameInput}
+                    onsuccess={handleCaseCreated}>
+                </c-ai-case-helper>
 
-            <template if:true={selectedCaseId}>
-                <div class="slds-m-top_small">
+                <template if:true={selectedCaseId}>
                     <c-case-detail case-id={selectedCaseId}></c-case-detail>
-                </div>
-            </template>
+                </template>
 
-            <template if:true={selectedAssetId}>
-                <div class="slds-m-top_small">
+                <template if:true={selectedAssetId}>
                     <c-asset-detail asset-id={selectedAssetId}></c-asset-detail>
+                </template>
+            </div>
+
+            <template if:true={showC360}>
+                <div class="right-pane">
+                    <c-c360-summary
+                        customer-name={customerName}
+                        oncaseclick={handleCaseClick}
+                        onassetclick={handleAssetClick}>
+                    </c-c360-summary>
+
+                    <template if:true={selectedAssetId}>
+                        <c-asset-product-info asset-id={selectedAssetId}></c-asset-product-info>
+                    </template>
                 </div>
             </template>
         </div>
+    </template>
 
-        <!-- 오른쪽: C360 Summary + 연결된 Product Info -->
-        <template if:true={showC360}>
-            <div class="right-pane">
-                <c-c360-summary
-                    customer-name={customerName}
-                    oncaseclick={handleCaseClick}
-                    onassetclick={handleAssetClick}>
-                </c-c360-summary>
-
-                <template if:true={selectedAssetId}>
-                    <div class="slds-m-top_medium">
-                        <c-asset-product-info asset-id={selectedAssetId}></c-asset-product-info>
-                    </div>
-                </template>
+    <template if:true={isCaseCreated}>
+        <div class="created-layout">
+            <div class="half-pane">
+                <c-full-case-view case-id={selectedCaseId}></c-full-case-view>
             </div>
-        </template>
-    </div>
+            <div class="half-pane">
+                <c-repair-assign-screen
+                    case-id={selectedCaseId}
+                    asset-id={selectedAssetId}>
+                </c-repair-assign-screen>
+            </div>
+        </div>
+    </template>
 </template>
