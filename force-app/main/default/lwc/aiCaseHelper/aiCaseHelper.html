@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="🧠 AI 케이스 생성 도우미">
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="분석 중..."></lightning-spinner>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-m-bottom_small" role="alert">
+                    <span class="slds-assistive-text">Error</span>
+                    <span>{error}</span>
+                </div>
+            </template>
+
+            <template if:true={showInput}>
+                <lightning-input label="고객 이름" value={customerName} onchange={handleName}></lightning-input>
+                <lightning-textarea label="문제 설명" value={issueDescription} onchange={handleDescription} oninput={adjustHeight}></lightning-textarea>
+
+                <!-- 버튼 정렬 -->
+                <div class="slds-grid slds-grid_align-spread slds-m-top_medium">
+                    <lightning-button label="📋 고객 요약 정보" variant="neutral" onclick={handleShowCustomerInfo}></lightning-button>
+                    <lightning-button label="AI 분석하기" variant="brand" onclick={handleAnalyze}></lightning-button>
+                </div>
+            </template>
+
+            <template if:true={showResult}>
+                <p class="slds-text-heading_small">🔧 케이스 정보 미리보기</p>
+                <lightning-record-edit-form object-api-name="Case" onsubmit={handleSubmit} onsuccess={handleSuccess}>
+                    <lightning-messages></lightning-messages>
+                    <lightning-input-field field-name="ContactId" value={caseData.contactId}></lightning-input-field>
+                    <lightning-input-field field-name="AccountId" value={caseData.accountId}></lightning-input-field>
+                    <lightning-input-field field-name="AssetId" value={caseData.assetId}></lightning-input-field>
+                    <lightning-input-field field-name="Subject" value={caseData.subject}></lightning-input-field>
+                    <lightning-textarea label="Description" readonly value={animatedDescription}></lightning-textarea>
+
+                    <div class="slds-grid slds-grid_align-spread slds-m-top_medium">
+                        <lightning-button label="⬅️ 뒤로" onclick={handleBack}></lightning-button>
+                        <lightning-button type="submit" label={submitButtonLabel} variant="success" disabled={isSaving}></lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+            </template>
+        </div>
+    </lightning-card>
+</template>

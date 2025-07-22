@@ -1,0 +1,31 @@
+<template>
+    <div class="layout">
+        <!-- 왼쪽: AI 케이스 생성 도우미 -->
+        <div class="left-pane slds-m-bottom_medium">
+            <c-ai-case-helper onnameentered={handleCustomerNameInput}></c-ai-case-helper>
+
+          <template if:true={selectedCaseId}>
+    <div class="slds-m-bottom_medium slds-m-top_small">
+        <c-case-detail case-id={selectedCaseId}></c-case-detail>
+    </div>
+</template>
+
+<template if:true={selectedAssetId}>
+    <div class="slds-m-top_small">
+        <c-asset-detail asset-id={selectedAssetId}></c-asset-detail>
+    </div>
+</template>
+        </div>
+
+        <!-- 오른쪽: 고객 요약 정보 -->
+        <template if:true={showC360}>
+            <div class="right-pane">
+                <c-c360-summary
+                    customer-name={customerName}
+                    oncaseclick={handleCaseClick}
+                    onassetclick={handleAssetClick}>
+                </c-c360-summary>
+            </div>
+        </template>
+    </div>
+</template>

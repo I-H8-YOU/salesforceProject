@@ -1,0 +1,13 @@
+.layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-pane {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.right-pane {
+    flex: 2; 
+}

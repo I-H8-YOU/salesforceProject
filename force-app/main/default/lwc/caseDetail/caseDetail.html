@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="케이스 상세 정보" icon-name="standard:case">
+        <template if:true={record}>
+            <div class="slds-box slds-theme_default slds-m-around_medium">
+                <p><strong>📝 제목:</strong> {record.Subject}</p><br>
+                <p><strong>📌 상태:</strong> {record.Status}</p><br>
+                <p><strong>🗓 생성일:</strong> {record.CreatedDate}</p><br>
+                <p><strong>🧾 설명:</strong> {record.Description}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>

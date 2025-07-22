@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="자산 상세 정보" icon-name="standard:asset_object">
+        <template if:true={record}>
+            <div class="slds-box slds-theme_default slds-m-around_medium">
+                <p><strong>📦 자산명:</strong> {record.Name}</p><br>
+                <p><strong>🔢 시리얼 번호:</strong> {record.SerialNumber}</p><br>
+                <p><strong>📋 상태:</strong> {record.Status}</p><br>
+                <p><strong>🗓 설치일:</strong> {record.InstallDate}</p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
