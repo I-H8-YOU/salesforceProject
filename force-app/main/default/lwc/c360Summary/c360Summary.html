@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="🧠 고객 360 요약 정보">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="불러오는 중..."></lightning-spinner>
+            <p class="slds-p-around_small slds-text-body_regular">
+                고객 요약 정보를 조회 중입니다. 잠시만 기다려 주세요.
+            </p>
+        </template>
+
+        <template if:true={textSummary}>
+    <!-- 고객 정보 -->
+    <section class="slds-box slds-theme_shade slds-p-around_medium">
+        <h3 class="slds-text-title_bold slds-m-bottom_x-small">👤 고객 정보</h3>
+        <div class="slds-text-body_regular animate-target" lwc:dom="manual" data-type="customer"></div>
+    </section>
+
+    <!-- 병원 정보 -->
+    <section class="slds-box slds-theme_default slds-p-around_medium slds-m-top_small">
+        <h3 class="slds-text-title_bold slds-m-bottom_x-small">🏥 병원 정보</h3>
+        <div class="slds-text-body_regular animate-target" lwc:dom="manual" data-type="account"></div>
+    </section>
+</template>
+
+        <template if:true={dataSummary}>
+            <!-- 최근 케이스 -->
+            <section class="slds-box slds-theme_shade slds-p-around_medium slds-m-top_small">
+                <h3 class="slds-text-title_bold slds-m-bottom_x-small">📨 최근 케이스</h3>
+                <template for:each={dataSummary.cases} for:item="c">
+                    <div key={c.Id}>
+                        <a data-id={c.Id} onclick={onCaseClicked}>{c.Subject}</a>
+                    </div>
+                </template>
+            </section>
+
+            <!-- 보유 자산 -->
+            <section class="slds-box slds-theme_default slds-p-around_medium slds-m-top_small">
+                <h3 class="slds-text-title_bold slds-m-bottom_x-small">📦 보유 자산</h3>
+                <template for:each={dataSummary.assets} for:item="a">
+                    <div key={a.Id}>
+                        <a data-id={a.Id} onclick={onAssetClicked}>{a.Name}</a>
+                    </div>
+                </template>
+            </section>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error slds-p-around_medium">{error}</p>
+        </template>
+    </lightning-card>
+</template>
