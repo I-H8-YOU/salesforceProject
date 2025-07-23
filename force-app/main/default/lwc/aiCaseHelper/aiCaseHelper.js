@@ -95,7 +95,7 @@ export default class AiCaseHelper extends LightningElement {
     }
 
     handleSuccess(event) {
-        console.log('🎯 [aiCaseHelper] handleSuccess 호출됨:', event.detail.id);
+        console.log('handleSuccess 호출됨:', event.detail.id);
 
         this.isSaving = false;
 
@@ -109,7 +109,7 @@ export default class AiCaseHelper extends LightningElement {
         }));
 
         this.dispatchEvent(new ShowToastEvent({
-            title: '✅ 케이스 저장 완료',
+            title: '케이스 저장 완료',
             message: `케이스 ID: ${event.detail.id}`,
             variant: 'success'
         }));
