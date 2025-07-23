@@ -6,6 +6,7 @@ export default class SuperCaseContainer extends LightningElement {
     @track selectedCaseId = null;
     @track selectedAssetId = null;
     @track isCaseCreated = false;
+    @track isRepairAssigned = false;
 
     handleCustomerNameInput(event) {
         const fullName = event.detail;
@@ -32,6 +33,7 @@ export default class SuperCaseContainer extends LightningElement {
     handleCaseClick(event) {
         this.selectedCaseId = event.detail;
         this.isCaseCreated = false;
+        this.isRepairAssigned = false;
     }
 
     handleAssetClick(event) {
@@ -39,10 +41,14 @@ export default class SuperCaseContainer extends LightningElement {
     }
 
     handleCaseCreated(event) {
-        console.log('[superCaseContainer] 이벤트 도착:', event.detail);
         this.selectedCaseId = event.detail.caseId;
         this.selectedAssetId = event.detail.assetId;
         this.isCaseCreated = true;
+        this.isRepairAssigned = false;
+    }
+
+    handleRepairAssigned() {
+        this.isRepairAssigned = true;
     }
 
     reformatName(name) {
