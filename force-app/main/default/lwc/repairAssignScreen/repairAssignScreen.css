@@ -1,18 +1,23 @@
 .container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
     padding: 1rem;
 }
 
 .user-box {
-    width: 100%;
+    flex: 1 1 calc(50% - 1rem);
     max-width: 500px;
-    margin: 0 auto 1.5rem auto;
-    padding: 1rem;
+    box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     background: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .bar-container {
@@ -33,6 +38,7 @@
     justify-content: center;
     font-weight: bold;
     border-radius: 6px;
+    min-width: 30px; /* 보이게 하기 위한 최소 너비 */
 }
 
 .bar-empty {
@@ -51,8 +57,13 @@
     text-align: center;
 }
 
-.fill-0   { width: 0%; }
+.fill-0   { width: 1%; min-width: 30px; }  /* width 0% 대신 */
 .fill-25  { width: 25%; }
 .fill-50  { width: 50%; }
 .fill-75  { width: 75%; }
 .fill-100 { width: 100%; }
+
+lightning-button {
+    margin-top: auto;
+    align-self: flex-start;
+}
