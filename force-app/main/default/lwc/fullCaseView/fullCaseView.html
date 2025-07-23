@@ -1,18 +1,72 @@
 <template>
     <template if:true={record}>
-        <lightning-card title="📄 전체 케이스 상세 정보">
-            <div class="slds-p-around_medium">
-                <p><strong>제목:</strong> {record.Subject}</p>
-                <p><strong>설명:</strong> {record.Description}</p>
-                <p><strong>상태:</strong> {record.Status}</p>
-                <p><strong>우선순위:</strong> {record.Priority}</p>
-                <p><strong>유형:</strong> {record.Type}</p>
-                <p><strong>생성일:</strong> {record.CreatedDate}</p>
+        <lightning-card title="케이스 상세 정보" icon-name="standard:case">
+            <div class="slds-p-around_medium slds-grid slds-wrap slds-gutters">
+
+                <!-- 왼쪽 정보 -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-box slds-theme_default slds-m-bottom_small">
+                        <h3 class="slds-text-title_caps slds-m-bottom_small">📌 기본 정보</h3>
+                        <p><strong>케이스 번호:</strong> {record.CaseNumber}</p>
+                        <p><strong>제목:</strong> {record.Subject}</p>
+                        <p><strong>설명:</strong></p>
+                        <div class="slds-box slds-theme_shade slds-m-vertical_small">
+                            <p>{record.Description}</p>
+                        </div>
+                    </div>
+
+                    <div class="slds-box slds-theme_default">
+                        <h3 class="slds-text-title_caps slds-m-bottom_small">📂 기타</h3>
+                        <p><strong>유형:</strong> {record.Type}</p>
+                        <p><strong>생성일:</strong> {record.CreatedDate}</p>
+                    </div>
+                </div>
+
+                <!-- 오른쪽 -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <div class="slds-box slds-theme_info slds-theme_alert-texture slds-m-bottom_small">
+                        <h3 class="slds-text-title_caps slds-m-bottom_small">📊 상태</h3>
+                        <p><strong>상태:</strong> {record.Status}</p>
+                        <p><strong>우선순위:</strong> {record.Priority}</p>
+                    </div>
+
+                    <template if:true={record.Milestones}>
+                        <div class="slds-box slds-theme_alert-texture slds-theme_shade">
+                            <h3 class="slds-text-title_caps slds-m-bottom_medium"> 마일스톤</h3>
+                            <template for:each={record.Milestones} for:item="m">
+                                <div key={m.Name} class="slds-box slds-theme_default slds-m-bottom_medium">
+                                    <h4 class="slds-text-heading_small slds-m-bottom_x-small"> {m.Name}</h4>
+
+                                    <div class="slds-grid slds-wrap slds-m-bottom_small">
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <p><strong>시작일:</strong> {m.StartDate}</p>
+                                            <p><strong>목표일:</strong> {m.TargetDate}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <template if:true={m.hasCompletionDate}>
+                                                <p><strong>완료일:</strong> {m.CompletionDate}</p>
+                                            </template>
+                                            <template if:false={m.hasCompletionDate}>
+                                                <p><strong>완료일:</strong> 진행 중</p>
+                                            </template>
+                                            <p><strong>상태:</strong> {m.statusText}</p>
+                                        </div>
+                                    </div>
+
+                                    <p class="slds-m-top_small"><strong>⏳ 남은 시간:</strong> {m.timeLeft}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
             </div>
         </lightning-card>
     </template>
 
     <template if:true={error}>
-        <p class="slds-text-color_error">오류: {error}</p>
+        <div class="slds-box slds-theme_error slds-m-around_medium">
+            <p class="slds-text-color_inverse">⚠️ 오류: {error}</p>
+        </div>
     </template>
 </template>
