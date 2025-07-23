@@ -6,31 +6,39 @@
 
         <template if:false={loading}>
             <div class="container">
-                <template for:each={users} for:item="user">
-                    <div key={user.userId} class="user-box">
-                        <div class="slds-text-heading_small slds-m-bottom_x-small">{user.userName}</div>
+                <template if:true={users.length}>
+                    <template for:each={users} for:item="user">
+                        <div key={user.userId} class="user-box">
+                            <div class="slds-text-heading_small slds-m-bottom_x-small">{user.userName}</div>
 
-                        <div class="bar-container">
-                            <template if:true={user.currentCount}>
-                                <div class={user.barClass}>
-                                    <span class="bar-label">{user.currentCount} / {maxCount}</span>
-                                </div>
-                            </template>
-                            <template if:false={user.currentCount}>
-                                <div class="bar-empty">
-                                    <span class="bar-label">0 / {maxCount}</span>
-                                </div>
-                            </template>
+                            <div class="bar-container">
+                                <template if:true={user.currentCount}>
+                                    <div class={user.barClass}>
+                                        <span class="bar-label">{user.currentCount} / {maxCount}</span>
+                                    </div>
+                                </template>
+                                <template if:false={user.currentCount}>
+                                    <div class="bar-empty">
+                                        <span class="bar-label">0 / {maxCount}</span>
+                                    </div>
+                                </template>
+                            </div>
+
+                            <lightning-button
+                                variant="brand"
+                                label="배정"
+                                data-userid={user.userId}
+                                onclick={handleAssign}
+                                class="slds-m-top_small"
+                                disabled={user.isDisabled}>
+                            </lightning-button>
                         </div>
+                    </template>
+                </template>
 
-                        <lightning-button
-                            variant="brand"
-                            label="배정"
-                            data-userid={user.userId}
-                            onclick={handleAssign}
-                            class="slds-m-top_small"
-                            disabled={user.isDisabled}>
-                        </lightning-button>
+                <template if:true={users} if:false={users.length}>
+                    <div class="slds-text-color_weak slds-m-top_medium">
+                        ⚠️ 배정 가능한 사용자가 없습니다.
                     </div>
                 </template>
             </div>
