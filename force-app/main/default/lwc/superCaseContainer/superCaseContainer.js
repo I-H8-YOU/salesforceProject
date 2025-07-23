@@ -39,6 +39,7 @@ export default class SuperCaseContainer extends LightningElement {
     }
 
     handleCaseCreated(event) {
+        console.log('[superCaseContainer] 이벤트 도착:', event.detail);
         this.selectedCaseId = event.detail.caseId;
         this.selectedAssetId = event.detail.assetId;
         this.isCaseCreated = true;
