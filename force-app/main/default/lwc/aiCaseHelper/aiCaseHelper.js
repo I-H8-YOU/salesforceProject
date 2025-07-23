@@ -23,7 +23,6 @@ export default class AiCaseHelper extends LightningElement {
 
     handleName(event) {
         this.customerName = event.detail.value;
-        // 입력만 저장, 이벤트는 버튼에서
     }
 
     handleDescription(event) {
@@ -37,7 +36,6 @@ export default class AiCaseHelper extends LightningElement {
         }
         this.error = null;
 
-        // 이름이 바뀌든 말든 항상 버튼 누를 때 이벤트 발생
         this.dispatchEvent(new CustomEvent('nameentered', {
             detail: this.customerName
         }));
@@ -97,18 +95,32 @@ export default class AiCaseHelper extends LightningElement {
     }
 
     handleSuccess(event) {
+        console.log('🎯 [aiCaseHelper] handleSuccess 호출됨:', event.detail.id);
+
         this.isSaving = false;
+
+        this.dispatchEvent(new CustomEvent('casesaved', {
+            detail: {
+                caseId: event.detail.id,
+                assetId: this.caseData.assetId
+            },
+            bubbles: true,
+            composed: true 
+        }));
+
         this.dispatchEvent(new ShowToastEvent({
             title: '✅ 케이스 저장 완료',
             message: `케이스 ID: ${event.detail.id}`,
             variant: 'success'
         }));
+
         this.resetForm();
     }
 
     resetForm() {
         this.customerName = '';
         this.issueDescription = '';
+        this.animatedDescription = '';
         this.caseData = {
             contactId: '',
             accountId: '',
@@ -116,16 +128,6 @@ export default class AiCaseHelper extends LightningElement {
             description: '',
             assetId: ''
         };
-        this.animatedDescription = '';
-
-        const form = this.template.querySelector('lightning-record-edit-form');
-        if (form) {
-            try {
-                form.reset();
-            } catch (err) {
-                console.error('⚠️ Reset form error: ', err);
-            }
-        }
 
         this.showInput = true;
         this.showResult = false;
