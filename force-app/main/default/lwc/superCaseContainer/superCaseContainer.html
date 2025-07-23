@@ -1,31 +1,42 @@
 <template>
     <template if:false={isCaseCreated}>
-        <div class="layout">
+        <div class="layout slds-var-p-around_medium">
+
             <div class="left-pane slds-m-bottom_medium">
-                <c-ai-case-helper
-                    onnameentered={handleCustomerNameInput}
-                    oncasesaved={handleCaseCreated}>
-                </c-ai-case-helper>
+                <div class="slds-var-m-vertical_medium">
+                    <c-ai-case-helper
+                        onnameentered={handleCustomerNameInput}
+                        oncasesaved={handleCaseCreated}>
+                    </c-ai-case-helper>
+                </div>
 
                 <template if:true={selectedCaseId}>
-                    <c-case-detail case-id={selectedCaseId}></c-case-detail>
+                    <div class="slds-var-m-vertical_medium">
+                        <c-case-detail case-id={selectedCaseId}></c-case-detail>
+                    </div>
                 </template>
 
                 <template if:true={selectedAssetId}>
-                    <c-asset-detail asset-id={selectedAssetId}></c-asset-detail>
+                    <div class="slds-var-m-vertical_medium">
+                        <c-asset-detail asset-id={selectedAssetId}></c-asset-detail>
+                    </div>
                 </template>
             </div>
 
             <template if:true={showC360}>
-                <div class="right-pane">
-                    <c-c360-summary
-                        customer-name={customerName}
-                        oncaseclick={handleCaseClick}
-                        onassetclick={handleAssetClick}>
-                    </c-c360-summary>
+                <div class="right-pane slds-var-m-vertical_medium">
+                    <div class="slds-var-m-vertical_medium">
+                        <c-c360-summary
+                            customer-name={customerName}
+                            oncaseclick={handleCaseClick}
+                            onassetclick={handleAssetClick}>
+                        </c-c360-summary>
+                    </div>
 
                     <template if:true={selectedAssetId}>
-                        <c-asset-product-info asset-id={selectedAssetId}></c-asset-product-info>
+                        <div class="slds-var-m-vertical_medium">
+                            <c-asset-product-info asset-id={selectedAssetId}></c-asset-product-info>
+                        </div>
                     </template>
                 </div>
             </template>
@@ -33,16 +44,22 @@
     </template>
 
     <template if:true={isCaseCreated}>
-        <div class="created-layout">
-            <div class="half-pane">
-                <c-full-case-view case-id={selectedCaseId}></c-full-case-view>
-            </div>
-            <div class="half-pane">
-                <c-repair-assign-screen
-                    case-id={selectedCaseId}
-                    asset-id={selectedAssetId}>
-                </c-repair-assign-screen>
-            </div>
+        <div class="created-layout slds-var-p-around_medium">
+            <template if:false={isRepairAssigned}>
+                <div class="half-pane slds-var-m-vertical_medium">
+                    <c-repair-assign-screen
+                        case-id={selectedCaseId}
+                        asset-id={selectedAssetId}
+                        onrepairassigned={handleRepairAssigned}>
+                    </c-repair-assign-screen>
+                </div>
+            </template>
+
+            <template if:true={isRepairAssigned}>
+                <div class="half-pane slds-var-m-vertical_medium">
+                    <c-full-case-view case-id={selectedCaseId}></c-full-case-view>
+                </div>
+            </template>
         </div>
     </template>
 </template>
